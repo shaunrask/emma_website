@@ -288,6 +288,7 @@
             position: relative;
             overflow: hidden;
             height: 400px;
+            cursor: pointer;
         }
 
         .gallery-item img {
@@ -418,6 +419,63 @@
 
         .resume-container .btn i {
             font-size: 1.1rem;
+        }
+
+        /* Media Section */
+        .media-intro {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 2rem;
+        }
+
+        .media-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .media-item h3 {
+            padding: 1rem;
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            text-align: center;
+        }
+
+        /* Media Section Responsive */
+        @media (max-width: 992px) {
+            .media-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Contact Section */
@@ -603,6 +661,84 @@
                 margin-right: auto;
             }
         }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            cursor: default;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-close::before,
+        .lightbox-close::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background-color: #999;
+            transition: background-color 0.3s ease;
+        }
+
+        .lightbox-close:hover::before,
+        .lightbox-close:hover::after {
+            background-color: #fff;
+        }
+
+        .lightbox-close::before {
+            transform: rotate(45deg);
+        }
+
+        .lightbox-close::after {
+            transform: rotate(-45deg);
+        }
     </style>
 </head>
 <body>
@@ -614,6 +750,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#media">Media</a></li>
                     <li><a href="#headshots">H + R</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -663,40 +800,124 @@
             <div class="gallery-grid">
                 <!-- Replace these with your actual images -->
                 <div class="gallery-item">
-                    <img src="/images/Headshot.jpeg" alt="Headshot 1">
+                    <img src="/images/emma-recital-18.jpg" alt="Headshot 1">
                     <div class="gallery-overlay">
                         <span>Headshot</span>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="/api/placeholder/600/800" alt="Performance Still">
+                    <img src="/images/IMG_0643.JPG" alt="Performance Still">
                     <div class="gallery-overlay">
                         <span>Performance</span>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="/api/placeholder/600/800" alt="Character Portrait">
+                    <img src="/images/IMG_1338.JPEG" alt="Character Portrait">
                     <div class="gallery-overlay">
                         <span>Character</span>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="/api/placeholder/600/800" alt="Behind the Scenes">
+                    <img src="/images/IMG_3355.jpeg" alt="Behind the Scenes">
                     <div class="gallery-overlay">
                         <span>Behind the Scenes</span>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="/api/placeholder/600/800" alt="Theatrical Performance">
+                    <img src="/images/IMG_9005.jpeg" alt="Theatrical Performance">
                     <div class="gallery-overlay">
                         <span>Theater</span>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="/api/placeholder/600/800" alt="Film Still">
+                    <img src="/images/IMG_8923.jpeg" alt="Film Still">
                     <div class="gallery-overlay">
                         <span>Film</span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Section -->
+    <section id="media">
+        <div class="container">
+            <h2 class="section-title">Media</h2>
+            <div class="media-intro">
+                <p>Watch some of my recent performances and reels.</p>
+            </div>
+            <div class="media-grid">
+                <div class="media-item">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://youtu.be/EwDjetoKKhU" 
+                            title="Performance Video 1"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <h3>Vocal Reel (Dramatic)</h3>
+                </div>
+                <div class="media-item">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://youtu.be/vgON-19MLYQ" 
+                            title="Performance Video 2"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <h3>Vocal Reel (Comedic)</h3>
+                </div>
+                <div class="media-item">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://youtu.be/spKpzA8_BfA" 
+                            title="Performance Video 3"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <h3>Monologue Reel</h3>
+                </div>
+                <div class="media-item">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://youtu.be/SjrW4z_hUTs" 
+                            title="Performance Video 4"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <h3>Dance Reel</h3>
+                </div>
+                <div class="media-item">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://youtu.be/EQj7ViVvTQU" 
+                            title="Performance Video 5"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <h3>Stage Combat Reel</h3>
+                </div>
+                <div class="media-item">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://youtu.be/vBotxJRKX98" 
+                            title="Performance Video 6"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <h3>Recital Reel</h3>
                 </div>
             </div>
         </div>
@@ -774,12 +995,19 @@
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
                 <a href="#gallery">Gallery</a>
+                <a href="#media">Media</a>
                 <a href="#headshots">H + R</a>
                 <a href="#contact">Contact</a>
             </div>
             <p class="copyright">&copy; 2025 Emma Rask. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-close" id="lightbox-close"></div>
+        <img id="lightbox-img" src="" alt="Gallery Image Full Size">
+    </div>
 
     <script>
         // Smooth scrolling for navigation links
@@ -825,6 +1053,60 @@
         // Observe all section titles
         document.querySelectorAll('.section-title').forEach((title) => {
             observer.observe(title);
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+
+        // Function to open lightbox
+        function openLightbox(imgSrc) {
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Function to close lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            // Optional: clear the image source after animation
+            setTimeout(() => {
+                if (!lightbox.classList.contains('active')) {
+                    lightboxImg.src = '';
+                }
+            }, 300);
+        }
+
+        // Add click handlers to all gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            const img = item.querySelector('img');
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                e.stopPropagation();
+                openLightbox(img.src);
+            });
+        });
+
+        // Close lightbox when clicking the close button
+        lightboxClose.addEventListener('click', e => {
+            e.stopPropagation();
+            closeLightbox();
+        });
+
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', e => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Close lightbox with escape key
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
         });
     </script>
 </body>
