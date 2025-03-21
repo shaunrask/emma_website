@@ -159,16 +159,16 @@
         }
 
         .hero-image {
-            height: 60%; /* Use percentage of parent container instead of viewport units */
+            height: 65%; /* Increased from 60% to 65% */
             width: auto;
-            max-width: 600px;
+            max-width: 700px; /* Increased from 600px */
             margin-bottom: 2rem;
         }
 
         .hero-image img {
             height: 100%;
             width: auto;
-            max-width: 100%; /* Ensure image doesn't overflow container width */
+            max-width: 100%;
             object-fit: contain;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
@@ -179,6 +179,17 @@
             font-weight: 700;
             letter-spacing: 2px;
             color: var(--primary-blue);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            font-weight: 300;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .hero .btn {
@@ -674,7 +685,7 @@
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .hero-image {
-                height: 50%; /* Slightly smaller on mobile */
+                height: 55%; /* Slightly smaller on mobile */
             }
             
             .hero h1 {
@@ -684,7 +695,7 @@
 
         @media (max-height: 800px) {
             .hero-image {
-                height: 50%; /* Adjust for shorter screens */
+                height: 55%; /* Adjust for shorter screens */
             }
         }
 
@@ -801,6 +812,7 @@
                 <img src="/images/Headshot.jpeg" alt="Emma Rask Headshot">
             </div>
             <h1>EMMA RASK</h1>
+            <div class="subtitle">ACTOR | SINGER | DANCER</div>
             <a href="#about" class="btn">About Me</a>
         </div>
     </section>
