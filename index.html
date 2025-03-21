@@ -304,16 +304,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(20, 69, 111, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.5s;
+            background: rgba(0, 0, 0, 0);
+            transition: background-color 0.3s ease;
         }
 
         .gallery-item:hover .gallery-overlay {
-            opacity: 1;
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .gallery-item:hover img {
@@ -340,11 +336,18 @@
             margin: 0 auto;
         }
 
-        .headshots-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        .hr-flex-container {
+            display: flex;
             gap: 2rem;
-            margin-bottom: 4rem;
+            align-items: stretch; /* Changed to stretch to match heights */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .headshot-side, .resume-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .headshot-item {
@@ -352,13 +355,13 @@
             overflow: hidden;
             aspect-ratio: 2/3;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            height: 100%; /* Fill the container height */
         }
 
         .headshot-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
         }
 
         .headshot-overlay {
@@ -393,11 +396,13 @@
         }
 
         .resume-container {
-            text-align: center;
-            padding: 2rem;
+            padding: 1rem;
             background: white;
             border-radius: 5px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
         }
 
         .resume-container h3 {
@@ -419,6 +424,37 @@
 
         .resume-container .btn i {
             font-size: 1.1rem;
+        }
+
+        .resume-image {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .resume-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .resume-container .btn {
+            margin-top: 1rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hr-flex-container {
+                flex-direction: column;
+            }
+
+            .headshot-side, .resume-container {
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto;
+            }
         }
 
         /* Media Section */
@@ -801,39 +837,35 @@
                 <!-- Replace these with your actual images -->
                 <div class="gallery-item">
                     <img src="/images/emma-recital-18.jpg" alt="Headshot 1">
-                    <div class="gallery-overlay">
-                        <span>Headshot</span>
-                    </div>
+                    <div class="gallery-overlay"></div>
                 </div>
                 <div class="gallery-item">
                     <img src="/images/IMG_0643.JPG" alt="Performance Still">
-                    <div class="gallery-overlay">
-                        <span>Performance</span>
-                    </div>
+                    <div class="gallery-overlay"></div>
                 </div>
                 <div class="gallery-item">
                     <img src="/images/IMG_1338.JPEG" alt="Character Portrait">
-                    <div class="gallery-overlay">
-                        <span>Character</span>
-                    </div>
+                    <div class="gallery-overlay"></div>
                 </div>
                 <div class="gallery-item">
                     <img src="/images/IMG_3355.jpeg" alt="Behind the Scenes">
-                    <div class="gallery-overlay">
-                        <span>Behind the Scenes</span>
-                    </div>
+                    <div class="gallery-overlay"></div>
                 </div>
                 <div class="gallery-item">
                     <img src="/images/IMG_9005.jpeg" alt="Theatrical Performance">
-                    <div class="gallery-overlay">
-                        <span>Theater</span>
-                    </div>
+                    <div class="gallery-overlay"></div>
                 </div>
                 <div class="gallery-item">
                     <img src="/images/IMG_8923.jpeg" alt="Film Still">
-                    <div class="gallery-overlay">
-                        <span>Film</span>
-                    </div>
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/images/IMG_8868.JPG" alt="Performance Photo">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/images/SLOC - Poppins Tech-672.JPG" alt="Stage Performance">
+                    <div class="gallery-overlay"></div>
                 </div>
             </div>
         </div>
@@ -928,24 +960,23 @@
         <div class="container">
             <h2 class="section-title">Headshots + Resume</h2>
             <div class="headshots-container">
-                <!-- Headshots Grid -->
-                <div class="headshots-grid">
-                    <div class="headshot-item">
-                        <img src="/images/Headshot.jpeg" alt="Professional Headshot">
-                        <div class="headshot-overlay">
-                            <span>Professional</span>
+                <div class="hr-flex-container">
+                    <!-- Headshot Side -->
+                    <div class="headshot-side">
+                        <div class="headshot-item">
+                            <img src="/images/Headshot.jpeg" alt="Professional Headshot">
                         </div>
                     </div>
-                    <!-- Add more headshot items as needed -->
-                </div>
-                
-                <!-- Resume Download -->
-                <div class="resume-container">
-                    <h3>Resume</h3>
-                    <p>Download my latest performance resume below:</p>
-                    <a href="/path-to-your-resume.pdf" class="btn" download>
-                        <i class="fas fa-download"></i> Download Resume
-                    </a>
+                    
+                    <!-- Resume Side -->
+                    <div class="resume-container">
+                        <div class="resume-image">
+                            <img src="/images/Artistic Resume.png" alt="Performance Resume">
+                        </div>
+                        <a href="/images/Artistic Resume.png" class="btn" download>
+                            <i class="fas fa-download"></i> Download Resume
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -987,9 +1018,9 @@
         <div class="container">
             <div class="footer-logo">EMMA RASK</div>
             <div class="social-links">
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.youtube.com/@emmarask5784" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/asemdemma/?hl=en" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/emma.rask.524/?_rdr" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             </div>
             <div class="footer-nav">
                 <a href="#home">Home</a>
