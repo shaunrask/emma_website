@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emma Rask | Actress</title>
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        /* Color variables */
+        :root {
+            --primary-blue: #14456f;
+            --light-blue: #97b8d4;
+            --dark-blue: #0a2541;
+            --accent-blue: #5497cf;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --background-light: #f8f9fb;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            font-weight: 500;
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: transparent;
+            color: var(--text-dark);
+            padding: 1.5rem 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            transition: background-color 0.3s, padding 0.3s;
+        }
+
+        header.scrolled {
+            background-color: white;
+            padding: 0.8rem 0;
+            position: fixed;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--primary-blue);
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2.5rem;
+        }
+
+        nav ul li a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-blue);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(20, 69, 111, 0.3), rgba(20, 69, 111, 0.5)), url('/api/placeholder/1200/1600');
+            background-size: cover;
+            background-position: center top;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 0.9rem 2.2rem;
+            text-decoration: none;
+            border-radius: 0;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border: 2px solid var(--primary-blue);
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary-blue);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-blue);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: var(--background-light);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text {
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Gallery Section */
+        .gallery-intro {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            height: 400px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 69, 111, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay span {
+            color: white;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid white;
+            padding: 0.5rem 1.5rem;
+        }
+
+        /* Credits Section */
+        .credits-section {
+            background-color: var(--background-light);
+        }
+
+        .credits-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .credits-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #666;
+        }
+
+        .credits-item {
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .credits-header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .credits-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .credits-subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .credits-content {
+            padding: 2rem;
+            flex-grow: 1;
+        }
+
+        .credits-description {
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .credits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        /* Contact Section */
+        .contact-intro {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-blue);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 0;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', 'Georgia', serif;
+        }
+
+        .social-links {
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            display: inline-block;
+            color: white;
+            margin: 0 0.8rem;
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: white;
+            color: var(--primary-blue);
+        }
+
+        .footer-nav {
+            margin: 1.5rem 0;
+        }
+
+        .footer-nav a {
+            color: white;
+            margin: 0 0.8rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .footer-nav a:hover {
+            color: var(--light-blue);
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header and Navigation -->
+    <header id="header">
+        <div class="container nav-container">
+            <div class="logo">EMMA RASK</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#credits">Credits</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section (Home) -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>EMMA RASK</h1>
+            <a href="#about" class="btn">About Me</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hello! My name is Emma Rask (she/her), and I'm a singer, actor, and musician from Upstate New York. I am a senior at the State University of New York at Fredonia, where I am earning my BFA in Musical Theatre with a minor in Dance. </p>
+                    
+                    <p>My passions include animals (ask me about my pets), my family, piano, karaoke, and tap dancing!
+                         A fun fact about me is that when I’m bored, I like to solve Algebra problems!
+                        </p>
+                    
+                    <p>I found my love for the arts very early in life. In elementary school, my parents took me to countless open mic events so I could play the piano and sing! And after my first musical, I knew I never wanted to leave the stage.</p>
+                    
+                    <p>I just had the opportunity to perform my BFA Senior Recital (a few short clips are linked in the Reels section of this website)! And for this year’s Mainstage season, I played Chutney in Legally Blonde and I am starting the rehearsal process for the One Act Play Festival in a few weeks.</p>
+                </div>
+                <a href="#gallery" class="btn">View Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+            <div class="gallery-intro">
+                <p>A collection of professional headshots and stills from my performances.</p>
+            </div>
+            <div class="gallery-grid">
+                <!-- Replace these with your actual images -->
+                <div class="gallery-item">
+                    <img src="/images/Headshot.jpeg" alt="Headshot 1">
+                    <div class="gallery-overlay">
+                        <span>Headshot</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/600/800" alt="Performance Still">
+                    <div class="gallery-overlay">
+                        <span>Performance</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/600/800" alt="Character Portrait">
+                    <div class="gallery-overlay">
+                        <span>Character</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/600/800" alt="Behind the Scenes">
+                    <div class="gallery-overlay">
+                        <span>Behind the Scenes</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/600/800" alt="Theatrical Performance">
+                    <div class="gallery-overlay">
+                        <span>Theater</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/600/800" alt="Film Still">
+                    <div class="gallery-overlay">
+                        <span>Film</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credits Section -->
+    <section id="credits" class="credits-section">
+        <div class="container">
+            <h2 class="section-title">Credits</h2>
+            <div class="credits-intro">
+                <p>Selected works from my acting career across theater, film, and television.</p>
+            </div>
+            <div class="credits-container">
+                <!-- Film Credits -->
+                <div class="credits-item">
+                    <div class="credits-header">
+                        <h3 class="credits-title">Film</h3>
+                    </div>
+                    <div class="credits-content">
+                        <p class="credits-description">Featured roles in independent and major studio productions.</p>
+                        <div class="credits-grid">
+                            <div>
+                                <h4>"Film Title" (2024)</h4>
+                                <p>Role: Character Name</p>
+                                <p>Director: Director Name</p>
+                            </div>
+                            <div>
+                                <h4>"Film Title" (2023)</h4>
+                                <p>Role: Character Name</p>
+                                <p>Director: Director Name</p>
+                            </div>
+                            <div>
+                                <h4>"Film Title" (2022)</h4>
+                                <p>Role: Character Name</p>
+                                <p>Director: Director Name</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Television Credits -->
+                <div class="credits-item">
+                    <div class="credits-header">
+                        <h3 class="credits-title">Television</h3>
+                    </div>
+                    <div class="credits-content">
+                        <p class="credits-description">Recurring and guest appearances on television series.</p>
+                        <div class="credits-grid">
+                            <div>
+                                <h4>"Series Title" (2024)</h4>
+                                <p>Role: Character Name</p>
+                                <p>Network: Network Name</p>
+                            </div>
+                            <div>
+                                <h4>"Series Title" (2023)</h4>
+                                <p>Role: Character Name</p>
+                                <p>Network: Network Name</p>
+                            </div>
+                            <div>
+                                <h4>"Series Title" (2022)</h4>
+                                <p>Role: Character Name</p>
+                                <p>Network: Network Name</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Theater Credits -->
+                <div class="credits-item">
+                    <div class="credits-header">
+                        <h3 class="credits-title">Theater</h3>
+                    </div>
+                    <div class="credits-content">
+                        <p class="credits-description">Stage performances in productions across various theaters.</p>
+                        <div class="credits-grid">
+                            <div>
+                                <h4>"Play Title" (2024)</h4>
+                                <p>Role: Character Name</p>
+                                <p>Theater: Theater Name</p>
+                            </div>
+                            <div>
+                                <h4>"Play Title" (2023)</h4>
+                                <p>Role: Character Name</p>
+                                <p>Theater: Theater Name</p>
+                            </div>
+                            <div>
+                                <h4>"Play Title" (2022)</h4>
+                                <p>Role: Character Name</p>
+                                <p>Theater: Theater Name</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-intro">
+                <p>For casting inquiries, collaboration opportunities, or any questions, please don't hesitate to reach out.</p>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="border: none; cursor: pointer; width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">EMMA RASK</div>
+            <div class="social-links">
+                <!-- Replace # with your actual social media links -->
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="Twitter">TW</a>
+                <a href="#" aria-label="Facebook">FB</a>
+                <a href="#" aria-label="LinkedIn">LI</a>
+            </div>
+            <div class="footer-nav">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#credits">Credits</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p class="copyright">&copy; 2025 Emma Rask. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
