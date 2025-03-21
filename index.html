@@ -4,12 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emma Rask | Actress</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* Base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-user-select: none;  /* Safari */
+            -ms-user-select: none;      /* IE 10 and IE 11 */
+            user-select: none;          /* Standard syntax */
+        }
+
+        /* But allow text selection in form inputs and textareas */
+        input, 
+        textarea {
+            -webkit-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
         }
 
         body {
@@ -40,7 +52,7 @@
         header {
             background-color: transparent;
             color: var(--text-dark);
-            padding: 1.5rem 0;
+            padding: 2.5rem 0;  /* Increased to 2.5rem */
             position: absolute;
             top: 0;
             left: 0;
@@ -51,7 +63,7 @@
 
         header.scrolled {
             background-color: white;
-            padding: 0.8rem 0;
+            padding: 1.2rem 0;  /* Increased to 1.2rem for scrolled state */
             position: fixed;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
@@ -64,8 +76,9 @@
 
         .nav-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            width: 100%;
         }
 
         .logo {
@@ -75,13 +88,22 @@
             letter-spacing: 1px;
         }
 
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
         }
 
         nav ul li {
-            margin-left: 2.5rem;
+            margin: 0 1.25rem; /* Adjust spacing between nav items */
         }
 
         nav ul li a {
@@ -93,6 +115,7 @@
             text-transform: uppercase;
             transition: color 0.3s;
             position: relative;
+            padding: 1rem 0;  /* Increased padding for nav items */
         }
 
         nav ul li a::after {
@@ -101,7 +124,7 @@
             width: 0;
             height: 2px;
             background-color: var(--accent-blue);
-            bottom: -5px;
+            bottom: 10px;  /* Changed this value - adjust between 5px to 15px to find the right position */
             left: 0;
             transition: width 0.3s;
         }
@@ -116,28 +139,50 @@
 
         /* Hero Section */
         .hero {
-            height: 100vh;
-            background-image: linear-gradient(rgba(20, 69, 111, 0.3), rgba(20, 69, 111, 0.5)), url('/api/placeholder/1200/1600');
-            background-size: cover;
-            background-position: center top;
+            min-height: 100vh;
+            background-color: var(--background-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            color: white;
-            padding-top: 70px;
+            padding: 120px 0 40px 0;
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            height: calc(100vh - 160px); /* Account for padding */
+        }
+
+        .hero-image {
+            height: 60%; /* Use percentage of parent container instead of viewport units */
+            width: auto;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image img {
+            height: 100%;
+            width: auto;
+            max-width: 100%; /* Ensure image doesn't overflow container width */
+            object-fit: contain;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .hero h1 {
             font-size: 4.5rem;
-            margin-bottom: 1.5rem;
+            margin: 1rem 0;
             font-weight: 700;
             letter-spacing: 2px;
+            color: var(--primary-blue);
+        }
+
+        .hero .btn {
+            margin-bottom: 20px; /* Add space below button */
         }
 
         .btn {
@@ -189,12 +234,18 @@
         .section-title::after {
             content: '';
             position: absolute;
-            width: 60px;
+            width: 0; /* Start at 0 width */
             height: 3px;
             background-color: var(--accent-blue);
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
+            transition: width 0.8s ease-out; /* Add smooth transition */
+        }
+
+        /* Add new class for when title is visible */
+        .section-title.visible::after {
+            width: 60px; /* Final width when visible */
         }
 
         /* About Section */
@@ -277,63 +328,96 @@
             padding: 0.5rem 1.5rem;
         }
 
-        /* Credits Section */
-        .credits-section {
+        /* Headshots + Resume Section */
+        .headshots-section {
             background-color: var(--background-light);
+            padding: 6rem 0;
         }
 
-        .credits-container {
-            max-width: 900px;
+        .headshots-container {
+            max-width: 1000px;
             margin: 0 auto;
         }
 
-        .credits-intro {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #666;
-        }
-
-        .credits-item {
-            background-color: white;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-bottom: 2.5rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .credits-header {
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 1.5rem;
-        }
-
-        .credits-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .credits-subtitle {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-
-        .credits-content {
-            padding: 2rem;
-            flex-grow: 1;
-        }
-
-        .credits-description {
-            margin-bottom: 1.5rem;
-            color: #666;
-            line-height: 1.7;
-        }
-
-        .credits-grid {
+        .headshots-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .headshot-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 2/3;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .headshot-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .headshot-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 69, 111, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .headshot-item:hover .headshot-overlay {
+            opacity: 1;
+        }
+
+        .headshot-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .headshot-overlay span {
+            color: white;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid white;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .resume-container {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .resume-container h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .resume-container p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .resume-container .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resume-container .btn i {
+            font-size: 1.1rem;
         }
 
         /* Contact Section */
@@ -492,19 +576,45 @@
                 padding: 4rem 0;
             }
         }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-image {
+                height: 50%; /* Slightly smaller on mobile */
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-height: 800px) {
+            .hero-image {
+                height: 50%; /* Adjust for shorter screens */
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .headshots-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Header and Navigation -->
     <header id="header">
         <div class="container nav-container">
-            <div class="logo">EMMA RASK</div>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#credits">Credits</a></li>
+                    <li><a href="#headshots">H + R</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -514,6 +624,9 @@
     <!-- Hero Section (Home) -->
     <section id="home" class="hero">
         <div class="container hero-content">
+            <div class="hero-image">
+                <img src="/images/Headshot.jpeg" alt="Emma Rask Headshot">
+            </div>
             <h1>EMMA RASK</h1>
             <a href="#about" class="btn">About Me</a>
         </div>
@@ -589,93 +702,29 @@
         </div>
     </section>
 
-    <!-- Credits Section -->
-    <section id="credits" class="credits-section">
+    <!-- Headshots + Resume Section -->
+    <section id="headshots" class="headshots-section">
         <div class="container">
-            <h2 class="section-title">Credits</h2>
-            <div class="credits-intro">
-                <p>Selected works from my acting career across theater, film, and television.</p>
-            </div>
-            <div class="credits-container">
-                <!-- Film Credits -->
-                <div class="credits-item">
-                    <div class="credits-header">
-                        <h3 class="credits-title">Film</h3>
-                    </div>
-                    <div class="credits-content">
-                        <p class="credits-description">Featured roles in independent and major studio productions.</p>
-                        <div class="credits-grid">
-                            <div>
-                                <h4>"Film Title" (2024)</h4>
-                                <p>Role: Character Name</p>
-                                <p>Director: Director Name</p>
-                            </div>
-                            <div>
-                                <h4>"Film Title" (2023)</h4>
-                                <p>Role: Character Name</p>
-                                <p>Director: Director Name</p>
-                            </div>
-                            <div>
-                                <h4>"Film Title" (2022)</h4>
-                                <p>Role: Character Name</p>
-                                <p>Director: Director Name</p>
-                            </div>
+            <h2 class="section-title">Headshots + Resume</h2>
+            <div class="headshots-container">
+                <!-- Headshots Grid -->
+                <div class="headshots-grid">
+                    <div class="headshot-item">
+                        <img src="/images/Headshot.jpeg" alt="Professional Headshot">
+                        <div class="headshot-overlay">
+                            <span>Professional</span>
                         </div>
                     </div>
+                    <!-- Add more headshot items as needed -->
                 </div>
                 
-                <!-- Television Credits -->
-                <div class="credits-item">
-                    <div class="credits-header">
-                        <h3 class="credits-title">Television</h3>
-                    </div>
-                    <div class="credits-content">
-                        <p class="credits-description">Recurring and guest appearances on television series.</p>
-                        <div class="credits-grid">
-                            <div>
-                                <h4>"Series Title" (2024)</h4>
-                                <p>Role: Character Name</p>
-                                <p>Network: Network Name</p>
-                            </div>
-                            <div>
-                                <h4>"Series Title" (2023)</h4>
-                                <p>Role: Character Name</p>
-                                <p>Network: Network Name</p>
-                            </div>
-                            <div>
-                                <h4>"Series Title" (2022)</h4>
-                                <p>Role: Character Name</p>
-                                <p>Network: Network Name</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Theater Credits -->
-                <div class="credits-item">
-                    <div class="credits-header">
-                        <h3 class="credits-title">Theater</h3>
-                    </div>
-                    <div class="credits-content">
-                        <p class="credits-description">Stage performances in productions across various theaters.</p>
-                        <div class="credits-grid">
-                            <div>
-                                <h4>"Play Title" (2024)</h4>
-                                <p>Role: Character Name</p>
-                                <p>Theater: Theater Name</p>
-                            </div>
-                            <div>
-                                <h4>"Play Title" (2023)</h4>
-                                <p>Role: Character Name</p>
-                                <p>Theater: Theater Name</p>
-                            </div>
-                            <div>
-                                <h4>"Play Title" (2022)</h4>
-                                <p>Role: Character Name</p>
-                                <p>Theater: Theater Name</p>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Resume Download -->
+                <div class="resume-container">
+                    <h3>Resume</h3>
+                    <p>Download my latest performance resume below:</p>
+                    <a href="/path-to-your-resume.pdf" class="btn" download>
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
                 </div>
             </div>
         </div>
@@ -717,17 +766,15 @@
         <div class="container">
             <div class="footer-logo">EMMA RASK</div>
             <div class="social-links">
-                <!-- Replace # with your actual social media links -->
-                <a href="#" aria-label="Instagram">IG</a>
-                <a href="#" aria-label="Twitter">TW</a>
-                <a href="#" aria-label="Facebook">FB</a>
-                <a href="#" aria-label="LinkedIn">LI</a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             </div>
             <div class="footer-nav">
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
                 <a href="#gallery">Gallery</a>
-                <a href="#credits">Credits</a>
+                <a href="#headshots">H + R</a>
                 <a href="#contact">Contact</a>
             </div>
             <p class="copyright">&copy; 2025 Emma Rask. All Rights Reserved.</p>
@@ -740,7 +787,12 @@
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                const target = document.querySelector(this.getAttribute('href'));
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
                     behavior: 'smooth'
                 });
             });
@@ -754,6 +806,25 @@
             } else {
                 header.classList.remove('scrolled');
             }
+        });
+
+        // Create an Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, {
+            threshold: 0.1, // Trigger when at least 10% of the element is visible
+            rootMargin: '-50px' // Adds a small buffer to prevent unwanted triggers
+        });
+
+        // Observe all section titles
+        document.querySelectorAll('.section-title').forEach((title) => {
+            observer.observe(title);
         });
     </script>
 </body>
