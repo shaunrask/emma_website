@@ -1,1156 +1,903 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emma Rask | Actress</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        /* Base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-user-select: none;  /* Safari */
-            -ms-user-select: none;      /* IE 10 and IE 11 */
-            user-select: none;          /* Standard syntax */
-        }
-
-        /* But allow text selection in form inputs and textareas */
-        input, 
-        textarea {
-            -webkit-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
-        }
-
-        body {
-            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #ffffff;
-        }
-
-        /* Color variables */
-        :root {
-            --primary-blue: #14456f;
-            --light-blue: #97b8d4;
-            --dark-blue: #0a2541;
-            --accent-blue: #5497cf;
-            --text-light: #ffffff;
-            --text-dark: #333333;
-            --background-light: #f8f9fb;
-        }
-
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', 'Georgia', serif;
-            font-weight: 500;
-        }
-
-        /* Header and Navigation */
-        header {
-            background-color: transparent;
-            color: var(--text-dark);
-            padding: 2.5rem 0;  /* Increased to 2.5rem */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-            transition: background-color 0.3s, padding 0.3s;
-        }
-
-        header.scrolled {
-            background-color: white;
-            padding: 1.2rem 0;  /* Increased to 1.2rem for scrolled state */
-            position: fixed;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 85%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 500;
-            color: var(--primary-blue);
-            letter-spacing: 1px;
-        }
-
-        nav {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin: 0 1.25rem; /* Adjust spacing between nav items */
-        }
-
-        nav ul li a {
-            color: var(--primary-blue);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: color 0.3s;
-            position: relative;
-            padding: 1rem 0;  /* Increased padding for nav items */
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-blue);
-            bottom: 10px;  /* Changed this value - adjust between 5px to 15px to find the right position */
-            left: 0;
-            transition: width 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent-blue);
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            background-color: var(--background-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 0 40px 0;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            height: calc(100vh - 160px); /* Account for padding */
-        }
-
-        .hero-image {
-            height: 65%; /* Increased from 60% to 65% */
-            width: auto;
-            max-width: 700px; /* Increased from 600px */
-            margin-bottom: 2rem;
-        }
-
-        .hero-image img {
-            height: 100%;
-            width: auto;
-            max-width: 100%;
-            object-fit: contain;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            margin: 1rem 0;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--primary-blue);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            margin-top: -0.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary-blue);
-            text-transform: uppercase;
-            font-weight: 300;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .hero .btn {
-            margin-bottom: 20px; /* Add space below button */
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 0.9rem 2.2rem;
-            text-decoration: none;
-            border-radius: 0;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s;
-            border: 2px solid var(--primary-blue);
-            font-size: 0.9rem;
-        }
-
-        .btn:hover {
-            background-color: transparent;
-            color: white;
-            border-color: white;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid white;
-            color: white;
-        }
-
-        .btn-outline:hover {
-            background-color: white;
-            color: var(--primary-blue);
-        }
-
-        /* Sections */
-        section {
-            padding: 6rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2.5rem;
-            color: var(--primary-blue);
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 0; /* Start at 0 width */
-            height: 3px;
-            background-color: var(--accent-blue);
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: width 0.8s ease-out; /* Add smooth transition */
-        }
-
-        /* Add new class for when title is visible */
-        .section-title.visible::after {
-            width: 60px; /* Final width when visible */
-        }
-
-        /* About Section */
-        .about-section {
-            background-color: var(--background-light);
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-text {
-            margin-bottom: 2rem;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            color: #666;
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        /* Gallery Section */
-        .gallery-intro {
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            text-align: center;
-            color: #666;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            height: 400px;
-            cursor: pointer;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0);
-            transition: background-color 0.3s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay span {
-            color: white;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 2px solid white;
-            padding: 0.5rem 1.5rem;
-        }
-
-        /* Headshots + Resume Section */
-        .headshots-section {
-            background-color: var(--background-light);
-            padding: 6rem 0;
-        }
-
-        .headshots-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .hr-flex-container {
-            display: flex;
-            gap: 2rem;
-            align-items: stretch; /* Changed to stretch to match heights */
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .headshot-side, .resume-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .headshot-item {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 2/3;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            height: 100%; /* Fill the container height */
-        }
-
-        .headshot-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .headshot-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(20, 69, 111, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-
-        .headshot-item:hover .headshot-overlay {
-            opacity: 1;
-        }
-
-        .headshot-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .headshot-overlay span {
-            color: white;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 2px solid white;
-            padding: 0.5rem 1.5rem;
-        }
-
-        .resume-container {
-            padding: 1rem;
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Center content vertically */
-        }
-
-        .resume-container h3 {
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-        }
-
-        .resume-container p {
-            color: #666;
-            margin-bottom: 1.5rem;
-        }
-
-        .resume-container .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .resume-container .btn i {
-            font-size: 1.1rem;
-        }
-
-        .resume-image {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .resume-image img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .resume-container .btn {
-            margin-top: 1rem;
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .hr-flex-container {
-                flex-direction: column;
-            }
-
-            .headshot-side, .resume-container {
-                width: 100%;
-                max-width: 400px;
-                margin: 0 auto;
-            }
-        }
-
-        /* Media Section */
-        .media-intro {
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            text-align: center;
-            color: #666;
-        }
-
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 2rem;
-        }
-
-        .media-item {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .media-item h3 {
-            padding: 1rem;
-            font-size: 1.1rem;
-            color: var(--primary-blue);
-            text-align: center;
-        }
-
-        /* Media Section Responsive */
-        @media (max-width: 992px) {
-            .media-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 576px) {
-            .media-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Contact Section */
-        .contact-intro {
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            text-align: center;
-            color: #666;
-        }
-
-        .contact-form {
-            max-width: 700px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 3rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--primary-blue);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 0;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            font-family: 'Playfair Display', 'Georgia', serif;
-        }
-
-        .social-links {
-            margin: 1.5rem 0;
-        }
-
-        .social-links a {
-            display: inline-block;
-            color: white;
-            margin: 0 0.8rem;
-            font-size: 1.2rem;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background-color: white;
-            color: var(--primary-blue);
-        }
-
-        .footer-nav {
-            margin: 1.5rem 0;
-        }
-
-        .footer-nav a {
-            color: white;
-            margin: 0 0.8rem;
-            text-decoration: none;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-        }
-
-        .footer-nav a:hover {
-            color: var(--light-blue);
-        }
-
-        .copyright {
-            opacity: 0.7;
-            font-size: 0.9rem;
-            margin-top: 1.5rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-            }
-            
-            nav ul {
-                margin-top: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 0.5rem 1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .contact-form {
-                padding: 2rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            section {
-                padding: 4rem 0;
-            }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .hero-image {
-                height: 55%; /* Slightly smaller on mobile */
-            }
-            
-            .hero h1 {
-                font-size: 3rem;
-            }
-        }
-
-        @media (max-height: 800px) {
-            .hero-image {
-                height: 55%; /* Adjust for shorter screens */
-            }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .headshots-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-
-        /* Lightbox */
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 9999;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .lightbox.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90vh;
-            object-fit: contain;
-            cursor: default;
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-        }
-
-        .lightbox.active img {
-            transform: scale(1);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .lightbox-close:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .lightbox-close::before,
-        .lightbox-close::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 2px;
-            background-color: #999;
-            transition: background-color 0.3s ease;
-        }
-
-        .lightbox-close:hover::before,
-        .lightbox-close:hover::after {
-            background-color: #fff;
-        }
-
-        .lightbox-close::before {
-            transform: rotate(45deg);
-        }
-
-        .lightbox-close::after {
-            transform: rotate(-45deg);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emma Rask | Actress</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    input,
+    textarea {
+      user-select: text;
+    }
+    body {
+      font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #ffffff;
+    }
+    :root {
+      --primary-blue: #14456f;
+      --light-blue: #97b8d4;
+      --dark-blue: #0a2541;
+      --accent-blue: #5497cf;
+      --text-light: #ffffff;
+      --text-dark: #333333;
+      --background-light: #f8f9fb;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      font-weight: 500;
+    }
+    
+    /* Container */
+    .container {
+      width: 85%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    /* Header and Navigation */
+    header {
+      width: 100%;
+      padding: 2.5rem 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      background: transparent;
+      transition: background-color 0.3s, padding 0.3s, backdrop-filter 0.3s;
+    }
+    header.scrolled {
+      position: fixed;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1.2rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    nav ul li {
+      margin: 0 1.25rem;
+    }
+    nav ul li a {
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      position: relative;
+      padding: 1rem 0;
+      transition: color 0.3s;
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 10px;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-blue);
+      transition: width 0.3s;
+    }
+    nav ul li a:hover {
+      color: var(--accent-blue);
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      background: var(--background-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 80px;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(20, 69, 111, 0.15), rgba(84, 151, 207, 0.15));
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+      height: calc(100vh - 80px);
+    }
+    .hero-image {
+      width: auto;
+      max-width: 700px;
+      height: 60%;
+      min-height: 300px;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-image img {
+      width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    .hero h1 {
+      font-size: 4.5rem;
+      margin: 1rem 0;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-blue);
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      margin: -0.5rem 0 1.5rem;
+      color: var(--primary-blue);
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+    
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      background-color: var(--primary-blue);
+      color: var(--text-light);
+      padding: 0.9rem 2.2rem;
+      text-decoration: none;
+      border: 2px solid var(--primary-blue);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      background-color: transparent;
+      color: var(--primary-blue);
+    }
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid var(--text-light);
+      color: var(--text-light);
+    }
+    .btn-outline:hover {
+      background-color: var(--text-light);
+      color: var(--primary-blue);
+    }
+    
+    /* Sections */
+    section {
+      padding: 6rem 0;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      color: var(--primary-blue);
+      position: relative;
+      padding-bottom: 15px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+    .section-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 60px;
+      height: 3px;
+      background-color: var(--accent-blue);
+      transform: translateX(-50%);
+    }
+    
+    /* About Section */
+    .about-section {
+      background-color: var(--background-light);
+    }
+    .about-flex-container {
+      display: flex;
+      gap: 4rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .about-text {
+      flex: 1;
+      text-align: left;
+      font-size: 1.1rem;
+      color: #666;
+      line-height: 1.8;
+    }
+    .about-image {
+      flex: 1;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .about-image img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Gallery Section */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      height: 400px;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      transition: background 0.3s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-item:hover .gallery-overlay {
+      background: rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Media Section */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-bottom: 2rem;
+    }
+    .media-item {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .media-item h3 {
+      padding: 1rem;
+      font-size: 1.1rem;
+      color: var(--primary-blue);
+      text-align: center;
+    }
+    
+    /* Headshots + Resume Section */
+    .hr-flex-container {
+      display: flex;
+      gap: 2rem;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+    .headshot-side,
+    .resume-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .headshot-item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 2/3;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .headshot-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .headshot-item:hover img {
+      transform: scale(1.05);
+    }
+    .resume-container {
+      padding: 1rem;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    .resume-container h3 {
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    .resume-container p {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    .resume-image img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1rem;
+    }
+    .resume-container .btn {
+      margin-top: 1rem;
+    }
+    
+    /* Contact Section */
+    .contact-form {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 3rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--primary-blue);
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid #e0e0e0;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+    .form-group textarea {
+      min-height: 150px;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--primary-blue);
+      color: #fff;
+      padding: 3rem 0;
+      text-align: center;
+    }
+    .footer-logo {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', 'Georgia', serif;
+    }
+    .social-links {
+      margin-bottom: 2rem; /* Increased from default */
+    }
+    .social-links a {
+      display: inline-block;
+      color: #fff;
+      margin: 0 0.8rem;
+      font-size: 1.2rem;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover {
+      background-color: #fff;
+      color: var(--primary-blue);
+    }
+    .footer-nav {
+      margin-top: 2rem; /* Optional: also adjust top margin of footer-nav for balanced spacing */
+    }
+    .footer-nav a {
+      color: #fff;
+      margin: 0 0.8rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .footer-nav a:hover {
+      color: var(--light-blue);
+    }
+    .copyright {
+      opacity: 0.7;
+      font-size: 0.9rem;
+      margin-top: 1.5rem;
+    }
+    
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90vh;
+      object-fit: contain;
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+    .lightbox.active img {
+      transform: scale(1);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .lightbox-close:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .lightbox-close::before,
+    .lightbox-close::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      background-color: #999;
+      transition: background-color 0.3s ease;
+    }
+    .lightbox-close:hover::before,
+    .lightbox-close:hover::after {
+      background-color: #fff;
+    }
+    .lightbox-close::before {
+      transform: rotate(45deg);
+    }
+    .lightbox-close::after {
+      transform: rotate(-45deg);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+      .nav-container {
+        flex-direction: column;
+      }
+      nav ul {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav ul li {
+        margin: 0.5rem 1rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .about-flex-container {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .headshot-side, .resume-container {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      .contact-form {
+        padding: 2rem;
+      }
+    }
+    @media (max-width: 576px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      section {
+        padding: 4rem 0;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header and Navigation -->
-    <header id="header">
-        <div class="container nav-container">
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#media">Media</a></li>
-                    <li><a href="#headshots">H + R</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section (Home) -->
-    <section id="home" class="hero">
-        <div class="container hero-content">
-            <div class="hero-image">
-                <img src="/images/Headshot.jpeg" alt="Emma Rask Headshot">
-            </div>
-            <h1>EMMA RASK</h1>
-            <div class="subtitle">ACTOR | SINGER | DANCER</div>
-            <a href="#about" class="btn">About Me</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Hello! My name is Emma Rask (she/her), and I'm a singer, actor, and musician from Upstate New York. I am a senior at the State University of New York at Fredonia, where I am earning my BFA in Musical Theatre with a minor in Dance. </p>
-                    
-                    <p>My passions include animals (ask me about my pets), my family, piano, karaoke, and tap dancing!
-                         A fun fact about me is that when I’m bored, I like to solve Algebra problems!
-                        </p>
-                    
-                    <p>I found my love for the arts very early in life. In elementary school, my parents took me to countless open mic events so I could play the piano and sing! And after my first musical, I knew I never wanted to leave the stage.</p>
-                    
-                    <p>I just had the opportunity to perform my BFA Senior Recital (a few short clips are linked in the Reels section of this website)! And for this year’s Mainstage season, I played Chutney in Legally Blonde and I am starting the rehearsal process for the One Act Play Festival in a few weeks.</p>
-                </div>
-                <a href="#gallery" class="btn">View Gallery</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery">
-        <div class="container">
-            <h2 class="section-title">Gallery</h2>
-            <div class="gallery-intro">
-                <p>A collection of professional headshots and stills from my performances.</p>
-            </div>
-            <div class="gallery-grid">
-                <!-- Replace these with your actual images -->
-                <div class="gallery-item">
-                    <img src="/images/emma-recital-18.jpg" alt="Headshot 1">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/images/IMG_0643.JPG" alt="Performance Still">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/images/IMG_1338.JPEG" alt="Character Portrait">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/images/IMG_3355.jpeg" alt="Behind the Scenes">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/images/IMG_9005.jpeg" alt="Theatrical Performance">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/images/IMG_8923.jpeg" alt="Film Still">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/images/IMG_8868.JPG" alt="Performance Photo">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/images/SLOC - Poppins Tech-672.JPG" alt="Stage Performance">
-                    <div class="gallery-overlay"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Media Section -->
-    <section id="media">
-        <div class="container">
-            <h2 class="section-title">Media</h2>
-            <div class="media-intro">
-                <p>Watch some of my recent performances and reels.</p>
-            </div>
-            <div class="media-grid">
-                <div class="media-item">
-                    <div class="video-container">
-                        <iframe 
-                            src="https://youtu.be/EwDjetoKKhU" 
-                            title="Performance Video 1"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <h3>Vocal Reel (Dramatic)</h3>
-                </div>
-                <div class="media-item">
-                    <div class="video-container">
-                        <iframe 
-                            src="https://youtu.be/vgON-19MLYQ" 
-                            title="Performance Video 2"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <h3>Vocal Reel (Comedic)</h3>
-                </div>
-                <div class="media-item">
-                    <div class="video-container">
-                        <iframe 
-                            src="https://youtu.be/spKpzA8_BfA" 
-                            title="Performance Video 3"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <h3>Monologue Reel</h3>
-                </div>
-                <div class="media-item">
-                    <div class="video-container">
-                        <iframe 
-                            src="https://youtu.be/SjrW4z_hUTs" 
-                            title="Performance Video 4"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <h3>Dance Reel</h3>
-                </div>
-                <div class="media-item">
-                    <div class="video-container">
-                        <iframe 
-                            src="https://youtu.be/EQj7ViVvTQU" 
-                            title="Performance Video 5"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <h3>Stage Combat Reel</h3>
-                </div>
-                <div class="media-item">
-                    <div class="video-container">
-                        <iframe 
-                            src="https://youtu.be/vBotxJRKX98" 
-                            title="Performance Video 6"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <h3>Recital Reel</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Headshots + Resume Section -->
-    <section id="headshots" class="headshots-section">
-        <div class="container">
-            <h2 class="section-title">Headshots + Resume</h2>
-            <div class="headshots-container">
-                <div class="hr-flex-container">
-                    <!-- Headshot Side -->
-                    <div class="headshot-side">
-                        <div class="headshot-item">
-                            <img src="/images/Headshot.jpeg" alt="Professional Headshot">
-                        </div>
-                    </div>
-                    
-                    <!-- Resume Side -->
-                    <div class="resume-container">
-                        <div class="resume-image">
-                            <img src="/images/Artistic Resume.png" alt="Performance Resume">
-                        </div>
-                        <a href="/images/Artistic Resume.png" class="btn" download>
-                            <i class="fas fa-download"></i> Download Resume
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-intro">
-                <p>For casting inquiries, collaboration opportunities, or any questions, please don't hesitate to reach out.</p>
-            </div>
-            <div class="contact-form">
-                <form action="https://formspree.io/f/your-formspree-id" method="POST">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn" style="border: none; cursor: pointer; width: 100%;">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-logo">EMMA RASK</div>
-            <div class="social-links">
-                <a href="https://www.youtube.com/@emmarask5784" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.instagram.com/asemdemma/?hl=en" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com/emma.rask.524/?_rdr" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            </div>
-            <div class="footer-nav">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#media">Media</a>
-                <a href="#headshots">H + R</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <p class="copyright">&copy; 2025 Emma Rask. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
-        <div class="lightbox-close" id="lightbox-close"></div>
-        <img id="lightbox-img" src="" alt="Gallery Image Full Size">
+  <!-- Header and Navigation -->
+  <header id="header">
+    <div class="container nav-container">
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#media">Media</a></li>
+          <li><a href="#headshots">H + R</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const target = document.querySelector(this.getAttribute('href'));
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            });
+  </header>
+  
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <div class="hero-image">
+        <img src="/images/Headshot.jpeg" alt="Emma Rask Headshot">
+      </div>
+      <h1>EMMA RASK</h1>
+      <div class="subtitle">ACTOR | SINGER | DANCER</div>
+      <a href="#about" class="btn">About Me</a>
+    </div>
+  </section>
+  
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <div class="about-flex-container">
+          <div class="about-text">
+            <p>Hello! My name is Emma Rask (she/her), and I'm a singer, actor, and musician from Upstate New York. I am a senior at the State University of New York at Fredonia, where I am earning my BFA in Musical Theatre with a minor in Dance.</p>
+            <p>My passions include animals (ask me about my pets), my family, piano, karaoke, and tap dancing! A fun fact about me is that when I'm bored, I like to solve Algebra problems!</p>
+            <p>I found my love for the arts very early in life. In elementary school, my parents took me to countless open mic events so I could play the piano and sing! And after my first musical, I knew I never wanted to leave the stage.</p>
+            <p>I just had the opportunity to perform my BFA Senior Recital (a few short clips are linked in the Reels section of this website)! And for this year’s Mainstage season, I played Chutney in Legally Blonde and I am starting the rehearsal process for the One Act Play Festival in a few weeks.</p>
+          </div>
+          <div class="about-image">
+            <img src="/images/MAZR9839 3.jpeg" alt="Emma Rask">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Gallery Section -->
+  <section id="gallery">
+    <div class="container">
+      <h2 class="section-title">Gallery</h2>
+      <div class="gallery-grid">
+        <!-- Example gallery items -->
+        <div class="gallery-item">
+          <img src="/images/IMG_8923.jpeg" alt="Character Portrait">
+          <div class="gallery-overlay"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/IMG_9005.jpeg" alt="Behind the Scenes">
+          <div class="gallery-overlay"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/SLOC - Poppins Tech-1080.JPG" alt="Theatrical Performance">
+          <div class="gallery-overlay"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/IMG_8868.JPG" alt="Film Still">
+          <div class="gallery-overlay"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/IMG_7877.JPG" alt="Performance Photo">
+          <div class="gallery-overlay"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/IMG_1338.JPEG" alt="Stage Performance">
+          <div class="gallery-overlay"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/IMG_9991.JPG" alt="Stage Performance">
+          <div class="gallery-overlay"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/IMG_0906.PNG" alt="Stage Performance">
+          <div class="gallery-overlay"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/IMG_1330.JPG" alt="Stage Performance">
+          <div class="gallery-overlay"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/IMG_3355.jpeg" alt="Stage Performance">
+          <div class="gallery-overlay"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/SLOC - Poppins Tech-672.JPG" alt="Stage Performance">
+          <div class="gallery-overlay"></div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/IMG_9734.JPG" alt="Stage Performance">
+          <div class="gallery-overlay"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Media Section -->
+  <section id="media">
+    <div class="container">
+      <h2 class="section-title">Media</h2>
+      <div class="media-grid">
+        <div class="media-item">
+          <div class="video-container">
+            <iframe src="https://youtu.be/EwDjetoKKhU" title="Performance Video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3>Vocal Reel (Dramatic)</h3>
+        </div>
+        <div class="media-item">
+          <div class="video-container">
+            <iframe src="https://youtu.be/vgON-19MLYQ" title="Performance Video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3>Vocal Reel (Comedic)</h3>
+        </div>
+        <div class="media-item">
+          <div class="video-container">
+            <iframe src="https://youtu.be/spKpzA8_BfA" title="Performance Video 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3>Monologue Reel</h3>
+        </div>
+        <div class="media-item">
+          <div class="video-container">
+            <iframe src="https://youtu.be/SjrW4z_hUTs" title="Performance Video 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3>Dance Reel</h3>
+        </div>
+        <div class="media-item">
+          <div class="video-container">
+            <iframe src="https://youtu.be/EQj7ViVvTQU" title="Performance Video 5" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3>Stage Combat Reel</h3>
+        </div>
+        <div class="media-item">
+          <div class="video-container">
+            <iframe src="https://youtu.be/vBotxJRKX98" title="Performance Video 6" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3>Recital Reel</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Headshots + Resume Section -->
+  <section id="headshots" class="headshots-section">
+    <div class="container">
+      <h2 class="section-title">Headshots + Resume</h2>
+      <div class="hr-flex-container">
+        <!-- Headshot Side -->
+        <div class="headshot-side">
+          <div class="headshot-item">
+            <img src="/images/Headshot.jpeg" alt="Professional Headshot">
+          </div>
+        </div>
+        <!-- Resume Side -->
+        <div class="resume-container">
+          <div class="resume-image">
+            <img src="/images/Artistic Resume.png" alt="Performance Resume">
+          </div>
+          <a href="/images/Artistic Resume.png" class="btn" download>
+            <i class="fas fa-download"></i> Download Resume
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-form">
+        <form action="https://formspree.io/f/your-formspree-id" method="POST">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo">EMMA RASK</div>
+      <div class="social-links">
+        <a href="https://www.youtube.com/@emmarask5784" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.instagram.com/asemdemma/?hl=en" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/emma.rask.524/?_rdr" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      </div>
+      <div class="footer-nav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#media">Media</a>
+        <a href="#headshots">H + R</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <p class="copyright">&copy; 2025 Emma Rask. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-close" id="lightbox-close"></div>
+    <img id="lightbox-img" src="" alt="Gallery Image Full Size">
+  </div>
+  
+  <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        const offsetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
         });
-        
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Create an Intersection Observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible');
-                }
-            });
-        }, {
-            threshold: 0.1, // Trigger when at least 10% of the element is visible
-            rootMargin: '-50px' // Adds a small buffer to prevent unwanted triggers
-        });
-
-        // Observe all section titles
-        document.querySelectorAll('.section-title').forEach((title) => {
-            observer.observe(title);
-        });
-
-        // Lightbox functionality
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxClose = document.getElementById('lightbox-close');
-
-        // Function to open lightbox
-        function openLightbox(imgSrc) {
-            lightboxImg.src = imgSrc;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    // Header scroll effect
+    window.addEventListener('scroll', function () {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Intersection Observer for section titles
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
         }
-
-        // Function to close lightbox
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-            // Optional: clear the image source after animation
-            setTimeout(() => {
-                if (!lightbox.classList.contains('active')) {
-                    lightboxImg.src = '';
-                }
-            }, 300);
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.section-title').forEach(title => {
+      observer.observe(title);
+    });
+    
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+    
+    function openLightbox(imgSrc) {
+      lightboxImg.src = imgSrc;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        if (!lightbox.classList.contains('active')) {
+          lightboxImg.src = '';
         }
-
-        // Add click handlers to all gallery items
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            const img = item.querySelector('img');
-            item.addEventListener('click', e => {
-                e.preventDefault();
-                e.stopPropagation();
-                openLightbox(img.src);
-            });
-        });
-
-        // Close lightbox when clicking the close button
-        lightboxClose.addEventListener('click', e => {
-            e.stopPropagation();
-            closeLightbox();
-        });
-
-        // Close lightbox when clicking outside the image
-        lightbox.addEventListener('click', e => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-
-        // Close lightbox with escape key
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                closeLightbox();
-            }
-        });
-    </script>
+      }, 300);
+    }
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      const img = item.querySelector('img');
+      item.addEventListener('click', e => {
+        e.preventDefault();
+        openLightbox(img.src);
+      });
+    });
+    lightboxClose.addEventListener('click', e => {
+      e.stopPropagation();
+      closeLightbox();
+    });
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  </script>
 </body>
 </html>
