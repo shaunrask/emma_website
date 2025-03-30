@@ -339,8 +339,9 @@
     /* Gallery Section */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 2rem;
     }
     .gallery-item {
       position: relative;
@@ -373,7 +374,7 @@
     /* Media Section */
     .media-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 30px;
       margin-bottom: 2rem;
     }
@@ -619,7 +620,8 @@
     
     /* Responsive adjustments */
     @media (max-width: 992px) {
-      .gallery-grid {
+      .gallery-grid,
+      .media-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -654,14 +656,18 @@
       }
     }
     @media (max-width: 576px) {
-      .gallery-grid {
-        grid-template-columns: 1fr;
+      .gallery-grid,
+      .media-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px; /* Reduced gap for smaller screens */
       }
-      .hero h1 {
-        font-size: 2.5rem;
+      
+      .gallery-item {
+        height: 200px; /* Optionally reduce height for smaller screens */
       }
-      section {
-        padding: 4rem 0;
+      
+      .video-container {
+        height: 150px; /* Adjust video container height for smaller screens */
       }
     }
     /* Add hamburger menu styles */
@@ -866,44 +872,44 @@
     </div>
   </section>
   
-  <!-- Media Section -->
+    <!-- Media Section -->
   <section id="media">
     <div class="container">
       <h2 class="section-title">Media</h2>
       <div class="media-grid">
         <div class="media-item">
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/EwDjetoKKhU" title="Performance Video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/EwDjetoKKhU" title="Performance Video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <h3>Vocal Reel (Dramatic)</h3>
         </div>
         <div class="media-item">
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/vgON-19MLYQ" title="Performance Video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/vgON-19MLYQ" title="Performance Video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <h3>Vocal Reel (Comedic)</h3>
         </div>
         <div class="media-item">
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/spKpzA8_BfA" title="Performance Video 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/spKpzA8_BfA" title="Performance Video 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <h3>Monologue Reel</h3>
         </div>
         <div class="media-item">
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/SjrW4z_hUTs" title="Performance Video 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/SjrW4z_hUTs" title="Performance Video 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <h3>Dance Reel</h3>
         </div>
         <div class="media-item">
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/EQj7ViVvTQU" title="Performance Video 5" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/EQj7ViVvTQU" title="Performance Video 5" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <h3>Stage Combat Reel</h3>
         </div>
         <div class="media-item">
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/vBotxJRKX98" title="Performance Video 6" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/vBotxJRKX98" title="Performance Video 6" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <h3>Recital Reel</h3>
         </div>
