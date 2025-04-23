@@ -1,2 +1,1 @@
-[readme
-](https://emmarask.com/)
+https://emmarask.com/
